@@ -4,7 +4,7 @@ const DOGS_API_KEY =
 
 const DOGS_API_BASE_URL = "https://api.thedogapi.com/v1";
 
-interface Breed {
+export interface Breed {
   id: string;
   name: string;
   image: {
@@ -12,13 +12,13 @@ interface Breed {
   };
 }
 
-interface BreedSearch {
+export interface BreedSearch {
   id: string;
   name: string;
   reference_image_id: string;
 }
 
-interface BreedImage {
+export interface BreedImage {
   id: string;
   height: number;
   width: number;
@@ -55,4 +55,8 @@ export const apiSlice = createApi({
   },
 });
 
-export const { useFetchBreedsQuery } = apiSlice;
+export const {
+  useFetchBreedsQuery,
+  useSearchBreedsQuery,
+  useGetBreedImageQuery,
+} = apiSlice;
