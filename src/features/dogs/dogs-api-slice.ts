@@ -1,29 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Breed, BreedImage, BreedSearch } from "./types";
 const DOGS_API_KEY =
   process.env.REACT_APP_DOGS_API_KEY || "REACT_APP_DOGS_API_KEY is missing";
 
 const DOGS_API_BASE_URL = "https://api.thedogapi.com/v1";
-
-export interface Breed {
-  id: string;
-  name: string;
-  image: {
-    url: string;
-  };
-}
-
-export interface BreedSearch {
-  id: string;
-  name: string;
-  reference_image_id: string;
-}
-
-export interface BreedImage {
-  id: string;
-  height: number;
-  width: number;
-  url: string;
-}
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -44,6 +24,11 @@ export const apiSlice = createApi({
       searchBreeds: builder.query<BreedSearch[], string>({
         query(query = "") {
           return `/breeds/search?q=${query}`;
+        },
+      }),
+      searchBreedsById: builder.query<BreedSearch[], number>({
+        query(breedId) {
+          return `/images/search?breed_ids=${breedId}`;
         },
       }),
       getBreedImage: builder.query<BreedImage, string>({
